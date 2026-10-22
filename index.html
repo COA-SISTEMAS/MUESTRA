@@ -2,49 +2,109 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#f4efe8">
-<meta name="description" content="Invitación digital">
-<title>Invitación digital</title>
+<title>Invitación</title>
 <style>
-*{box-sizing:border-box}html,body{margin:0;padding:0;min-height:100%;background:#f4efe8;color:#222;font-family:Georgia,'Times New Roman',serif}body{overflow-x:hidden}.invitation{position:relative;width:min(100vw,1100px);margin:auto;line-height:0;isolation:isolate}.invitation>img{display:block;width:100%;height:auto;user-select:none;-webkit-user-drag:none;animation:entrada 1.4s ease both}.shine{position:absolute;inset:0;pointer-events:none;overflow:hidden}.shine:after{content:"";position:absolute;top:-20%;left:-45%;width:25%;height:140%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.22),transparent);transform:rotate(12deg);animation:brillo 7s ease-in-out infinite}.petalo{position:fixed;width:7px;height:11px;border-radius:70% 20% 70% 20%;background:rgba(196,174,142,.45);pointer-events:none;z-index:4;animation:caer linear infinite}.actions{position:absolute;left:50%;bottom:2.5%;transform:translateX(-50%);display:flex;gap:10px;z-index:8;line-height:normal}.action{border:1px solid rgba(255,255,255,.55);border-radius:999px;padding:11px 18px;background:rgba(35,30,25,.88);color:#fff;font:600 14px Arial,sans-serif;cursor:pointer;box-shadow:0 7px 24px rgba(0,0,0,.18);transition:.25s}.action:hover{transform:translateY(-2px);background:#16120f}.confirmacion{position:fixed;inset:0;background:rgba(20,17,14,.66);backdrop-filter:blur(5px);display:flex;align-items:center;justify-content:center;padding:18px;z-index:30;opacity:0;visibility:hidden;transition:.3s}.confirmacion.abierta{opacity:1;visibility:visible}.card{width:min(100%,500px);max-height:92vh;overflow:auto;background:#f8f4ee;border-radius:22px;padding:28px;box-shadow:0 20px 70px rgba(0,0,0,.3);line-height:normal;transform:translateY(20px) scale(.98);transition:.3s}.confirmacion.abierta .card{transform:none}.card h2{margin:0 0 7px;text-align:center;font-size:29px;font-weight:500}.card p.sub{margin:0 0 22px;text-align:center;color:#6b6259;font:14px Arial,sans-serif;line-height:1.5}.cerrar{position:absolute;top:15px;right:15px;border:0;background:transparent;font:28px Arial;color:#6b6259;cursor:pointer}.campo{margin:0 0 15px}.campo label{display:block;margin-bottom:7px;font:600 12px Arial,sans-serif;color:#4c453f}.campo input,.campo select,.campo textarea{width:100%;border:1px solid #d7cfc5;background:#fffdf9;border-radius:11px;padding:12px 13px;font:15px Arial,sans-serif;outline:none}.campo input:focus,.campo select:focus,.campo textarea:focus{border-color:#9c8973;box-shadow:0 0 0 3px rgba(156,137,115,.12)}.opciones{display:grid;grid-template-columns:1fr 1fr;gap:9px}.opcion{position:relative}.opcion input{position:absolute;opacity:0}.opcion label{display:block;padding:12px;text-align:center;border:1px solid #d7cfc5;border-radius:11px;background:#fffdf9;cursor:pointer;font:14px Arial,sans-serif}.opcion input:checked+label{background:#29231e;color:#fff;border-color:#29231e}.enviar{width:100%;border:0;border-radius:999px;padding:14px;background:#29231e;color:#fff;font:700 14px Arial,sans-serif;cursor:pointer;margin-top:3px}.enviar:disabled{opacity:.6}.nota{margin-top:12px;text-align:center;color:#80766c;font:11px Arial,sans-serif;line-height:1.4}.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,20px);background:rgba(25,22,19,.95);color:#fff;padding:12px 17px;border-radius:12px;font:14px Arial,sans-serif;opacity:0;pointer-events:none;transition:.25s;z-index:50}.toast.show{opacity:1;transform:translate(-50%,0)}@keyframes entrada{from{opacity:0;transform:scale(1.018)}to{opacity:1;transform:scale(1)}}@keyframes brillo{0%,65%,100%{left:-45%;opacity:0}72%{opacity:1}88%{left:120%;opacity:0}}@keyframes caer{0%{transform:translate3d(0,-10vh,0) rotate(0deg);opacity:0}10%{opacity:1}90%{opacity:.7}100%{transform:translate3d(80px,110vh,0) rotate(260deg);opacity:0}}@media(max-width:600px){.actions{bottom:1.5%}.action{font-size:12px;padding:9px 14px}.card{padding:24px 18px}.card h2{font-size:25px}}@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;width:100%;min-height:100%;background:#f4efe8}
+body{overflow-x:hidden;color:#222;font-family:Arial,sans-serif}
+.invitation{position:relative;width:min(100vw,1100px);margin:auto;line-height:0;background:#f4efe8;min-height:100vh}
+#svgHost{width:100%;line-height:0}
+#svgHost svg{display:block;width:100%;height:auto;overflow:visible}
+/* Movimiento sutil de las fotografías que ya existen dentro del SVG original */
+#svgHost svg image{transform-box:fill-box;transform-origin:center;will-change:transform}
+#svgHost svg image.photo-float-1{animation:floatOne 8s ease-in-out infinite}
+#svgHost svg image.photo-float-2{animation:floatTwo 10s ease-in-out infinite}
+#svgHost svg image.photo-float-3{animation:floatThree 9s ease-in-out infinite}
+#svgHost svg image.photo-float-4{animation:floatFour 11s ease-in-out infinite}
+#svgHost svg image.photo-float-5{animation:floatFive 9.5s ease-in-out infinite}
+#svgHost svg image.photo-float-6{animation:floatSix 12s ease-in-out infinite}
+#svgHost svg image.photo-float-7{animation:floatSeven 10.5s ease-in-out infinite}
+#svgHost svg image.photo-float-8{animation:floatEight 13s ease-in-out infinite}
+@keyframes floatOne{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(0,-5px) scale(1.008)}}
+@keyframes floatTwo{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(5px,0) scale(1.012)}}
+@keyframes floatThree{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-4px,4px) scale(1.01)}}
+@keyframes floatFour{0%,100%{transform:translate(0,0) rotate(0deg)}50%{transform:translate(3px,-4px) rotate(.35deg)}}
+@keyframes floatFive{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-5px,0) scale(1.01)}}
+@keyframes floatSix{0%,100%{transform:translate(0,0)}50%{transform:translate(0,5px)}}
+@keyframes floatSeven{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(4px,3px) scale(1.008)}}
+@keyframes floatEight{0%,100%{transform:translate(0,0)}50%{transform:translate(-3px,-4px)}}
+@media(prefers-reduced-motion:reduce){#svgHost svg image{animation:none!important}}
+.controls{position:fixed;right:18px;bottom:18px;z-index:20;display:flex;gap:8px;align-items:center}
+.action{border:0;border-radius:999px;padding:12px 17px;background:rgba(28,28,28,.92);color:#fff;font:600 14px/1 Arial,sans-serif;cursor:pointer;box-shadow:0 8px 25px rgba(0,0,0,.2);backdrop-filter:blur(8px)}
+.action:hover{background:#111;transform:translateY(-1px)}
+.modal{position:fixed;inset:0;z-index:100;background:rgba(25,25,25,.48);display:none;align-items:center;justify-content:center;padding:18px;backdrop-filter:blur(6px)}
+.modal.open{display:flex}
+.card{width:min(100%,460px);max-height:92vh;overflow:auto;background:#f8f4ee;border-radius:22px;padding:26px;box-shadow:0 25px 70px rgba(0,0,0,.28);line-height:normal}
+.card h2{margin:0 0 6px;font:600 28px/1.15 Georgia,serif;color:#24201c;text-align:center}
+.card p{margin:0 0 18px;text-align:center;color:#68615a;font-size:14px}
+.field{margin:0 0 13px}.field label{display:block;font-size:13px;font-weight:700;color:#4b453f;margin-bottom:6px}.field input,.field select,.field textarea{width:100%;border:1px solid #d6cec4;border-radius:12px;padding:11px 12px;background:#fff;color:#25211e;font:14px Arial,sans-serif;outline:none}.field textarea{min-height:80px;resize:vertical}.field input:focus,.field select:focus,.field textarea:focus{border-color:#9d8f80;box-shadow:0 0 0 3px rgba(157,143,128,.12)}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.buttons{display:flex;gap:9px;margin-top:18px}.buttons button{flex:1;border:0;border-radius:12px;padding:12px;cursor:pointer;font-weight:700}.cancel{background:#e6dfd7;color:#3b3631}.send{background:#28231f;color:#fff}.success{display:none;text-align:center;padding:18px 4px}.success strong{display:block;font:600 24px Georgia,serif;margin-bottom:8px}.success span{color:#68615a;font-size:14px}
+.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,20px);background:rgba(20,20,20,.92);color:#fff;padding:10px 16px;border-radius:10px;font:14px Arial,sans-serif;opacity:0;pointer-events:none;transition:.25s;z-index:150;white-space:nowrap}.toast.show{opacity:1;transform:translate(-50%,0)}
+@media(max-width:560px){.controls{right:10px;bottom:10px;left:10px}.action{flex:1;font-size:12px;padding:11px 12px}.card{padding:21px}.row{grid-template-columns:1fr}.card h2{font-size:24px}}
 </style>
 </head>
 <body>
 <main class="invitation" aria-label="Invitación digital">
-<img src="invitacion%20(2).svg" alt="Invitación digital" draggable="false">
-<div class="shine"></div>
-<div id="petalos"></div>
-<div class="actions">
-<button class="action" id="confirmarBtn" type="button">Confirmar asistencia</button>
-<button class="action" id="shareBtn" type="button">Compartir</button>
-</div>
+  <div id="svgHost" aria-label="Diseño de la invitación"></div>
 </main>
-<div class="confirmacion" id="modal" aria-hidden="true">
-<section class="card" role="dialog" aria-modal="true" aria-labelledby="tituloConfirmacion">
-<button class="cerrar" id="cerrarBtn" aria-label="Cerrar">×</button>
-<h2 id="tituloConfirmacion">Confirmación de asistencia</h2>
-<p class="sub">Por favor completa tus datos para confirmar tu asistencia.</p>
-<form id="rsvpForm">
-<div class="campo"><label for="nombre">Nombre completo</label><input id="nombre" name="nombre" required autocomplete="name" placeholder="Escribe tu nombre"></div>
-<div class="campo"><label>¿Asistirás?</label><div class="opciones"><div class="opcion"><input id="si" name="asistencia" value="Sí asistiré" type="radio" required><label for="si">Sí, asistiré</label></div><div class="opcion"><input id="no" name="asistencia" value="No podré asistir" type="radio"><label for="no">No podré asistir</label></div></div></div>
-<div class="campo"><label for="acompanantes">Número de acompañantes</label><select id="acompanantes" name="acompanantes"><option value="0">Ninguno</option><option value="1">1 acompañante</option><option value="2">2 acompañantes</option><option value="3">3 acompañantes</option><option value="4">4 acompañantes</option></select></div>
-<div class="campo"><label for="mensaje">Mensaje para los novios (opcional)</label><textarea id="mensaje" name="mensaje" rows="3" placeholder="Escribe un mensaje especial..."></textarea></div>
-<button class="enviar" id="enviarBtn" type="submit">Guardar confirmación</button>
-<p class="nota">Tu confirmación se guardará en este dispositivo. Podemos conectarla después a Google Sheets para recibir las respuestas.</p>
-</form>
-</section>
+<div class="controls">
+  <button class="action" id="shareBtn" type="button">Compartir</button>
+  <button class="action" id="rsvpBtn" type="button">Confirmar asistencia</button>
+</div>
+<div class="modal" id="rsvpModal" role="dialog" aria-modal="true" aria-labelledby="rsvpTitle">
+  <section class="card">
+    <div id="formView">
+      <h2 id="rsvpTitle">Confirma tu asistencia</h2>
+      <p>Nos encantará saber si podrás acompañarnos.</p>
+      <form id="rsvpForm">
+        <div class="field"><label for="name">Nombre completo</label><input id="name" name="name" required autocomplete="name" placeholder="Escribe tu nombre"></div>
+        <div class="field"><label for="attendance">¿Asistirás?</label><select id="attendance" name="attendance" required><option value="">Selecciona una opción</option><option value="Sí asistiré">Sí, asistiré</option><option value="No podré asistir">No podré asistir</option></select></div>
+        <div class="row">
+          <div class="field"><label for="guests">Acompañantes</label><select id="guests" name="guests"><option>0</option><option>1</option><option>2</option><option>3</option><option>4</option></select></div>
+          <div class="field"><label for="phone">Teléfono</label><input id="phone" name="phone" inputmode="tel" placeholder="Opcional"></div>
+        </div>
+        <div class="field"><label for="message">Mensaje</label><textarea id="message" name="message" placeholder="Un mensaje para los novios (opcional)"></textarea></div>
+        <div class="buttons"><button class="cancel" type="button" id="closeBtn">Cerrar</button><button class="send" type="submit">Enviar confirmación</button></div>
+      </form>
+    </div>
+    <div class="success" id="successView"><strong>¡Gracias!</strong><span>Tu confirmación quedó registrada en este dispositivo.</span><div class="buttons"><button class="send" type="button" id="doneBtn">Listo</button></div></div>
+  </section>
 </div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 <script>
-const modal=document.getElementById('modal'),toast=document.getElementById('toast'),form=document.getElementById('rsvpForm');
-function showToast(t){toast.textContent=t;toast.classList.add('show');clearTimeout(window.__t);window.__t=setTimeout(()=>toast.classList.remove('show'),2400)}
-function abrir(){modal.classList.add('abierta');modal.setAttribute('aria-hidden','false');setTimeout(()=>document.getElementById('nombre').focus(),250)}
-function cerrar(){modal.classList.remove('abierta');modal.setAttribute('aria-hidden','true')}
-document.getElementById('confirmarBtn').onclick=abrir;document.getElementById('cerrarBtn').onclick=cerrar;modal.addEventListener('click',e=>{if(e.target===modal)cerrar()});document.addEventListener('keydown',e=>{if(e.key==='Escape')cerrar()});
-form.addEventListener('submit',e=>{e.preventDefault();const data=Object.fromEntries(new FormData(form).entries());localStorage.setItem('confirmacionInvitacion',JSON.stringify({...data,fecha:new Date().toISOString()}));cerrar();showToast('¡Confirmación guardada correctamente!');form.reset()});
-document.getElementById('shareBtn').onclick=async()=>{try{if(navigator.share)await navigator.share({title:'Invitación digital',text:'Te comparto esta invitación',url:location.href});else{await navigator.clipboard.writeText(location.href);showToast('Enlace copiado')}}catch(e){}};
-const cont=document.getElementById('petalos');for(let i=0;i<14;i++){const p=document.createElement('i');p.className='petalo';p.style.left=Math.random()*100+'vw';p.style.animationDuration=(7+Math.random()*8)+'s';p.style.animationDelay=(-Math.random()*12)+'s';p.style.transform='rotate('+Math.random()*180+'deg)';cont.appendChild(p)}
+const SVG_FILE='invitacion%20(2).svg';
+const host=document.getElementById('svgHost');
+const modal=document.getElementById('rsvpModal');
+const form=document.getElementById('rsvpForm');
+const toast=document.getElementById('toast');
+function showToast(text){toast.textContent=text;toast.classList.add('show');clearTimeout(window.__toast);window.__toast=setTimeout(()=>toast.classList.remove('show'),2200)}
+async function loadInvitation(){
+ try{
+  const response=await fetch(SVG_FILE,{cache:'no-store'});
+  if(!response.ok)throw new Error('No se pudo cargar la invitación');
+  const text=await response.text();
+  const doc=new DOMParser().parseFromString(text,'image/svg+xml');
+  const svg=doc.documentElement;
+  host.replaceChildren(document.importNode(svg,true));
+  const images=host.querySelectorAll('svg image');
+  images.forEach((img,i)=>img.classList.add(`photo-float-${(i%8)+1}`));
+ }catch(error){
+  host.innerHTML='<p style="padding:30px;text-align:center;line-height:1.5">No se pudo cargar la invitación. Recarga la página.</p>';
+  console.error(error);
+ }
+}
+function openModal(){modal.classList.add('open');document.body.style.overflow='hidden';document.getElementById('name').focus()}
+function closeModal(){modal.classList.remove('open');document.body.style.overflow=''}
+document.getElementById('rsvpBtn').addEventListener('click',openModal);
+document.getElementById('closeBtn').addEventListener('click',closeModal);
+document.getElementById('doneBtn').addEventListener('click',closeModal);
+modal.addEventListener('click',e=>{if(e.target===modal)closeModal()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+form.addEventListener('submit',e=>{e.preventDefault();const data=Object.fromEntries(new FormData(form).entries());data.createdAt=new Date().toISOString();const previous=JSON.parse(localStorage.getItem('invitacion_rsvp')||'[]');previous.push(data);localStorage.setItem('invitacion_rsvp',JSON.stringify(previous));document.getElementById('formView').style.display='none';document.getElementById('successView').style.display='block'});
+document.getElementById('shareBtn').addEventListener('click',async()=>{const data={title:document.title,text:'Te comparto esta invitación',url:location.href};try{if(navigator.share)await navigator.share(data);else if(navigator.clipboard){await navigator.clipboard.writeText(location.href);showToast('Enlace copiado')}else showToast('Copia el enlace para compartirlo')}catch(e){}});
+loadInvitation();
 </script>
 </body>
 </html>

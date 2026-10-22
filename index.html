@@ -12,7 +12,6 @@ body{overflow-x:hidden;color:#222;font-family:Arial,sans-serif}
 .invitation{position:relative;width:min(100vw,1100px);margin:auto;line-height:0;background:#f4efe8;min-height:100vh}
 #svgHost{width:100%;line-height:0}
 #svgHost svg{display:block;width:100%;height:auto;overflow:visible}
-/* Movimiento sutil de las fotografías que ya existen dentro del SVG original */
 #svgHost svg image{transform-box:fill-box;transform-origin:center;will-change:transform}
 #svgHost svg image.photo-float-1{animation:floatOne 8s ease-in-out infinite}
 #svgHost svg image.photo-float-2{animation:floatTwo 10s ease-in-out infinite}
@@ -30,7 +29,15 @@ body{overflow-x:hidden;color:#222;font-family:Arial,sans-serif}
 @keyframes floatSix{0%,100%{transform:translate(0,0)}50%{transform:translate(0,5px)}}
 @keyframes floatSeven{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(4px,3px) scale(1.008)}}
 @keyframes floatEight{0%,100%{transform:translate(0,0)}50%{transform:translate(-3px,-4px)}}
-@media(prefers-reduced-motion:reduce){#svgHost svg image{animation:none!important}}
+
+/* El nombre se escribe como una máquina de escribir sobre el nombre original */
+.name-typewriter{position:absolute;top:0;left:0;width:100%;height:4.45%;background:#f4efe8;z-index:5;display:flex;align-items:center;justify-content:center;overflow:hidden;pointer-events:none}
+.name-typewriter .name{margin-top:-.1%;font-family:"Courier New",monospace;font-size:clamp(19px,5vw,58px);font-weight:400;letter-spacing:-1.5px;color:#24201c;white-space:nowrap;line-height:1}
+.name-typewriter .cursor{display:inline-block;width:.06em;height:1.02em;background:#24201c;margin-left:.08em;vertical-align:-.08em;animation:blink .75s steps(1,end) infinite}
+.name-typewriter.done .cursor{animation:blink .9s steps(1,end) infinite}
+@keyframes blink{50%{opacity:0}}
+
+@media(prefers-reduced-motion:reduce){#svgHost svg image{animation:none!important}.name-typewriter .cursor{animation:none}}
 .controls{position:fixed;right:18px;bottom:18px;z-index:20;display:flex;gap:8px;align-items:center}
 .action{border:0;border-radius:999px;padding:12px 17px;background:rgba(28,28,28,.92);color:#fff;font:600 14px/1 Arial,sans-serif;cursor:pointer;box-shadow:0 8px 25px rgba(0,0,0,.2);backdrop-filter:blur(8px)}
 .action:hover{background:#111;transform:translateY(-1px)}
@@ -42,12 +49,15 @@ body{overflow-x:hidden;color:#222;font-family:Arial,sans-serif}
 .field{margin:0 0 13px}.field label{display:block;font-size:13px;font-weight:700;color:#4b453f;margin-bottom:6px}.field input,.field select,.field textarea{width:100%;border:1px solid #d6cec4;border-radius:12px;padding:11px 12px;background:#fff;color:#25211e;font:14px Arial,sans-serif;outline:none}.field textarea{min-height:80px;resize:vertical}.field input:focus,.field select:focus,.field textarea:focus{border-color:#9d8f80;box-shadow:0 0 0 3px rgba(157,143,128,.12)}
 .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.buttons{display:flex;gap:9px;margin-top:18px}.buttons button{flex:1;border:0;border-radius:12px;padding:12px;cursor:pointer;font-weight:700}.cancel{background:#e6dfd7;color:#3b3631}.send{background:#28231f;color:#fff}.success{display:none;text-align:center;padding:18px 4px}.success strong{display:block;font:600 24px Georgia,serif;margin-bottom:8px}.success span{color:#68615a;font-size:14px}
 .toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,20px);background:rgba(20,20,20,.92);color:#fff;padding:10px 16px;border-radius:10px;font:14px Arial,sans-serif;opacity:0;pointer-events:none;transition:.25s;z-index:150;white-space:nowrap}.toast.show{opacity:1;transform:translate(-50%,0)}
-@media(max-width:560px){.controls{right:10px;bottom:10px;left:10px}.action{flex:1;font-size:12px;padding:11px 12px}.card{padding:21px}.row{grid-template-columns:1fr}.card h2{font-size:24px}}
+@media(max-width:560px){.controls{right:10px;bottom:10px;left:10px}.action{flex:1;font-size:12px;padding:11px 12px}.card{padding:21px}.row{grid-template-columns:1fr}.card h2{font-size:24px}.name-typewriter{height:4.55%}.name-typewriter .name{font-size:clamp(15px,5vw,42px);letter-spacing:-1px}}
 </style>
 </head>
 <body>
 <main class="invitation" aria-label="Invitación digital">
   <div id="svgHost" aria-label="Diseño de la invitación"></div>
+  <div class="name-typewriter" aria-label="Nombre de los novios">
+    <div class="name" id="typedName"></div><span class="cursor" id="cursor"></span>
+  </div>
 </main>
 <div class="controls">
   <button class="action" id="shareBtn" type="button">Compartir</button>
@@ -61,10 +71,7 @@ body{overflow-x:hidden;color:#222;font-family:Arial,sans-serif}
       <form id="rsvpForm">
         <div class="field"><label for="name">Nombre completo</label><input id="name" name="name" required autocomplete="name" placeholder="Escribe tu nombre"></div>
         <div class="field"><label for="attendance">¿Asistirás?</label><select id="attendance" name="attendance" required><option value="">Selecciona una opción</option><option value="Sí asistiré">Sí, asistiré</option><option value="No podré asistir">No podré asistir</option></select></div>
-        <div class="row">
-          <div class="field"><label for="guests">Acompañantes</label><select id="guests" name="guests"><option>0</option><option>1</option><option>2</option><option>3</option><option>4</option></select></div>
-          <div class="field"><label for="phone">Teléfono</label><input id="phone" name="phone" inputmode="tel" placeholder="Opcional"></div>
-        </div>
+        <div class="row"><div class="field"><label for="guests">Acompañantes</label><select id="guests" name="guests"><option>0</option><option>1</option><option>2</option><option>3</option><option>4</option></select></div><div class="field"><label for="phone">Teléfono</label><input id="phone" name="phone" inputmode="tel" placeholder="Opcional"></div></div>
         <div class="field"><label for="message">Mensaje</label><textarea id="message" name="message" placeholder="Un mensaje para los novios (opcional)"></textarea></div>
         <div class="buttons"><button class="cancel" type="button" id="closeBtn">Cerrar</button><button class="send" type="submit">Enviar confirmación</button></div>
       </form>
@@ -79,6 +86,8 @@ const host=document.getElementById('svgHost');
 const modal=document.getElementById('rsvpModal');
 const form=document.getElementById('rsvpForm');
 const toast=document.getElementById('toast');
+const typedName=document.getElementById('typedName');
+const typewriter=document.querySelector('.name-typewriter');
 function showToast(text){toast.textContent=text;toast.classList.add('show');clearTimeout(window.__toast);window.__toast=setTimeout(()=>toast.classList.remove('show'),2200)}
 async function loadInvitation(){
  try{
@@ -88,12 +97,15 @@ async function loadInvitation(){
   const doc=new DOMParser().parseFromString(text,'image/svg+xml');
   const svg=doc.documentElement;
   host.replaceChildren(document.importNode(svg,true));
-  const images=host.querySelectorAll('svg image');
-  images.forEach((img,i)=>img.classList.add(`photo-float-${(i%8)+1}`));
- }catch(error){
-  host.innerHTML='<p style="padding:30px;text-align:center;line-height:1.5">No se pudo cargar la invitación. Recarga la página.</p>';
-  console.error(error);
- }
+  host.querySelectorAll('svg image').forEach((img,i)=>img.classList.add(`photo-float-${(i%8)+1}`));
+ }catch(error){host.innerHTML='<p style="padding:30px;text-align:center;line-height:1.5">No se pudo cargar la invitación. Recarga la página.</p>';console.error(error)}
+}
+function typeName(){
+ const text='Aerin and May';
+ typedName.textContent='';
+ let i=0;
+ const tick=()=>{if(i<text.length){typedName.textContent+=text.charAt(i++);setTimeout(tick,115)}else typewriter.classList.add('done')};
+ setTimeout(tick,650);
 }
 function openModal(){modal.classList.add('open');document.body.style.overflow='hidden';document.getElementById('name').focus()}
 function closeModal(){modal.classList.remove('open');document.body.style.overflow=''}
@@ -105,6 +117,7 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
 form.addEventListener('submit',e=>{e.preventDefault();const data=Object.fromEntries(new FormData(form).entries());data.createdAt=new Date().toISOString();const previous=JSON.parse(localStorage.getItem('invitacion_rsvp')||'[]');previous.push(data);localStorage.setItem('invitacion_rsvp',JSON.stringify(previous));document.getElementById('formView').style.display='none';document.getElementById('successView').style.display='block'});
 document.getElementById('shareBtn').addEventListener('click',async()=>{const data={title:document.title,text:'Te comparto esta invitación',url:location.href};try{if(navigator.share)await navigator.share(data);else if(navigator.clipboard){await navigator.clipboard.writeText(location.href);showToast('Enlace copiado')}else showToast('Copia el enlace para compartirlo')}catch(e){}});
 loadInvitation();
+typeName();
 </script>
 </body>
 </html>
